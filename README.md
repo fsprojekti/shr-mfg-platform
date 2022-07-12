@@ -13,7 +13,7 @@ by Tomaž:
 graph TD
 subgraph ML[Application layer]
     MO[Origin plant management]
-    MC[Cariers management ]
+    MC[Carriers management ]
 end
 subgraph CL[Communication layer]
     subgraph CL1[HTTP servers]
