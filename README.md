@@ -11,7 +11,7 @@ by Tomaž:
 	
 ```mermaid
 graph TD
-graph TD
+
 subgraph ML[Management layer]
     MO[Origin plant management]
     MC[Multiple cariers management ]
