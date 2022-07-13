@@ -11,13 +11,10 @@ by Tomaž:
 	
 ```mermaid
 graph TD
+graph TD
 subgraph ML[Management layer]
     MO[Origin plant management]
-    MC[Cariers management ]
-    MW[Warehouse]
-
-    MM[Manufacturing plant]
-
+    MC[Multiple cariers management ]
 end
 subgraph CL[Communication layer]
     subgraph CL1[HTTP servers]
@@ -30,15 +27,17 @@ subgraph CL[Communication layer]
     CT[Track]
     end
 end
-subgraph AL[Application layer]
+subgraph AL[Control layer]
     AO[Origin plant app]
-    AC[Cariers app]
+    AC[Carier app]
     AW[Warehouse app]
     AM[Manufacturing plant app]
     AT[Track app]
 end
 subgraph PL[Physical layer]
-    T[Track]
+    subgraph PL3 [Camera tracking]
+        T[Track]
+    end
     subgraph PL1[ESP Microbit]
     C[Carrier]
     end
@@ -61,10 +60,10 @@ CW---AW
 CM---AM
 CT---AT
 
-MO---|HTTP API|CO
-MW---|HTTP API|CW
+
+
 MC---|HTTP API|CC
-MM---|HTTP API|CM
+MO---|HTTP API|CO
 
 
 
@@ -72,5 +71,6 @@ style CL fill:#FAD7A0, stroke:#F5B041
 style PL fill:#AED6F1, stroke:#3498DB
 style ML fill:#ABEBC6, stroke:#28B463
 style AL fill:#D7BDE2, stroke:#884EA0
+
 
 ```
