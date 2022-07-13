@@ -29,7 +29,7 @@ subgraph CL[Communication layer]
 end
 subgraph AL[Control layer]
     AO[Origin plant app]
-    AC[Carier app]
+    AC[Carrier app]
     AW[Warehouse app]
     AM[Manufacturing plant app]
     AT[Track app]
