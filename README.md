@@ -76,7 +76,7 @@ style AL fill:#D7BDE2, stroke:#884EA0
 
 sequenceDiagram
 participant P as Package
-    Note over P: Order for manufacturing <br>has been confirmed
+    Note over P: Order for mfg <br>has been confirmed
 participant C as Carriers managmenet
 participant A as Carrier
 participant O as Master plant 
@@ -85,7 +85,7 @@ participant M as Manufacturer
 P->>C: requestTransport(master plant <br>location, mfg location)
 C->>A: move(master plant position)
 A-->>C: response(accept/reject)
-Note over A: Carrier moving to the <br>master plant location
+Note over A: Carrier moving to <br>master plant location
 A->>C: report(error/done)
 C->>O: dispatch(packageId)
 O-->>C: response(accept/reject, dispatch task id)
@@ -94,11 +94,11 @@ O->>C: dispatchFinished(taskId)
 C->>A: move(manufacturer location)
 
 A-->>C: response(accept/reject)
-Note over A: Carrier moving to the <br>mfg location
+Note over A: Carrier moving to <br>mfg location
 A->>C: report(error/done)
 C->>M: dispatch(packageId)
 M-->>C: response(accept/reject, dispatch task id)
-Note over M: dispatching process
+Note over M: dispatch process
 M->>C: dispatchFinished(taskId)
 C->>P: transportFinished <br>(taskId)
 C->>A: move(next task/parking)
