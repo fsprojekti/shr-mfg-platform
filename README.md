@@ -21,7 +21,6 @@ subgraph CL[Communication layer]
     CC[Carrier]
     CO[Master plant]
     CM[Manufacturing plant]
-
     MCM[Multiple carriers]
     CPP[Multiple packages]
 
@@ -83,6 +82,7 @@ participant O as Master plant
 participant M as Manufacturer 
 
 P->>C: requestTransport(master plant <br>location, mfg location)
+C-->>P: response(accept/reject)
 C->>A: move(master plant position)
 A-->>C: response(accept/reject)
 Note over A: Carrier moving to <br>master pl. location
