@@ -124,9 +124,9 @@ C->>A: move(next task/parking)
 
 | API endpoint | description | parameter(s) | returns |
 | ------------ | ----------- | ------------ | ------- |
-| <code>/request</code> | Request transportation of package. Request goes to queue as task | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
+| <code>/request</code> | Request transportation of package. Request goes to queue as task | <code>msg={"source": a, "target" = b}</code> |{status (accept, reject), queueIndex, taskId}|
 | <code>/report</code> | Report on state of the task | <code>msg={"taskId": a, "state" = error/done }</code> ||
-| <code>/gettask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
+| <code>/getTask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
 
 
 ## Master plant HTTP API
