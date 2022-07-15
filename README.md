@@ -78,10 +78,30 @@ style AL fill:#D7BDE2, stroke:#884EA0
 # Communication layer
 
 ## Carrier HTTP API
+
+| API endpoint | description | parameter(s) | returns |
+| ------------ | ----------- | ------------ | ------- |
+| <code>/move</code> | Move from source to target position | <code>msg={"source": a, "target" = b, "taskId"=? }</code> |{success/error}|
+
+
 ## Multiple carriers HTTP API
+
+| API endpoint | description | parameter(s) | returns |
+| ------------ | ----------- | ------------ | ------- |
+| <code>/request</code> | Request transportation of package. Request goes to queue as task | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
+| <code>/report</code> | Report on state of the task | <code>msg={"taskId": a, "state" = error/done }</code> ||
+| <code>/gettask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
+
+
 ## Master plant HTTP API
 ## Manufacturing plant HTTP API
 ## Multiple packages HTTP API
+
+| API endpoint | description | parameter(s) | returns |
+| ------------ | ----------- | ------------ | ------- |
+| <code>/request</code> | Request transportation of package. Request goes to queue as task | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
+| <code>/report</code> | Report on state of the task | <code>msg={"taskId": a, "state" = error/done }</code> ||
+| <code>/gettask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
 
 # Control layer
 ## Carrier control app
