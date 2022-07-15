@@ -13,57 +13,52 @@ by Tomaž:
 graph TD
 
 subgraph ML[Management layer]
-    MO[Origin plant management]
     MC[Multiple cariers management ]
+    MPP[Multiple packages management]
 end
 subgraph CL[Communication layer]
     subgraph CL1[HTTP servers]
     CC[Carrier]
-    CO[Origin plant]
-    CW[Warehouse]
+    CO[Master plant]
     CM[Manufacturing plant]
+
+    MCM[Multiple cariers]
+    CPP[Multiple packages]
+
+
     end
-    subgraph CL2[Socket servers]
-    CT[Track]
-    end
+    
 end
 subgraph AL[Control layer]
-    AO[Origin plant app]
+    AO[Master plant app]
     AC[Carrier app]
-    AW[Warehouse app]
     AM[Manufacturing plant app]
-    AT[Track app]
+   
 end
 subgraph PL[Physical layer]
-    subgraph PL3 [Camera tracking]
-        T[Track]
-    end
     subgraph PL1[ESP Microbit]
     C[Carrier]
     end
    
     subgraph PL2[JetMax robotic arm]
-        W[Warehouse]
         M[Manufacturing plant]
-        O[Origin plant]
+        O[Master plant]
     end
+    P[Packages]
 end
-AT---T
+
 AO---O
 AC---C
-AW---W
 AM---M
 
 CO---AO
 CC---AC
-CW---AW
 CM---AM
-CT---AT
 
 
+MPP---CPP---P
 
 MC---|HTTP API|CC
-MO---|HTTP API|CO
 
 
 
@@ -74,3 +69,23 @@ style AL fill:#D7BDE2, stroke:#884EA0
 
 
 ```
+# Blockchain layer
+
+# Management layer
+## Multiple carriers managment
+## Multiple packages managment
+
+# Communication layer
+
+## Carrier HTTP API
+## Multiple carriers HTTP API
+## Master plant HTTP API
+## Manufacturing plant HTTP API
+## Multiple packages HTTP API
+
+# Control layer
+## Carrier control app
+## Master plant control app
+## Manufacturing plant control app
+
+
