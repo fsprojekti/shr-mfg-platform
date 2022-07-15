@@ -13,7 +13,7 @@ by Tomaž:
 graph TD
 
 subgraph ML[Management layer]
-    MC[Multiple cariers management ]
+    MC[Multiple carriers management ]
     MPP[Multiple packages management]
 end
 subgraph CL[Communication layer]
@@ -22,7 +22,7 @@ subgraph CL[Communication layer]
     CO[Master plant]
     CM[Manufacturing plant]
 
-    MCM[Multiple cariers]
+    MCM[Multiple carriers]
     CPP[Multiple packages]
 
 
@@ -82,25 +82,25 @@ participant A as Carrier
 participant O as Master plant 
 participant M as Manufacturer 
 
-P->>C: requestTransport(master plant position, <br>manufacturer position)
+P->>C: requestTransport(master plant location, <br>manufacturer location)
 C->>A: move(master plant position)
 A-->>C: response(accept/reject)
-Note over A: Carrier is driving to the master plant
+Note over A: Carrier is driving to the master plant location
 A->>C: report(error/done)
 C->>O: dispatch(packageId)
 O-->>C: response(accept/reject, dispatch task id)
 Note over O: dispatching process
 O->>C: dispatchFinished(taskId)
-C->>A: move(manufacturer position)
+C->>A: move(manufacturer location)
 
 A-->>C: response(accept/reject)
-Note over A: Carrier is driving to the manufacturer
+Note over A: Carrier is driving to the manufacturer location
 A->>C: report(error/done)
 C->>M: dispatch(packageId)
 M-->>C: response(accept/reject, dispatch task id)
 Note over M: dispatching process
 M->>C: dispatchFinished(taskId)
-C->>P: transportfinished(taskId)
+C->>P: transportFinished(taskId)
 C->>A: move(next task/parking)
 
 ```
@@ -108,8 +108,8 @@ C->>A: move(next task/parking)
 # Blockchain layer
 
 # Management layer
-## Multiple carriers managment
-## Multiple packages managment
+## Multiple carriers management
+## Multiple packages management
 
 # Communication layer
 
@@ -117,7 +117,7 @@ C->>A: move(next task/parking)
 
 | API endpoint | description | parameter(s) | returns |
 | ------------ | ----------- | ------------ | ------- |
-| <code>/move</code> | Move from source to target position | <code>msg={"source": a, "target" = b, "taskId"=? }</code> |{success/error}|
+| <code>/move</code> | Move from source to target location | <code>msg={"source": a, "target" = b, "taskId"=? }</code> |{success/error}|
 
 
 ## Multiple carriers HTTP API
@@ -135,9 +135,9 @@ C->>A: move(next task/parking)
 
 | API endpoint | description | parameter(s) | returns |
 | ------------ | ----------- | ------------ | ------- |
-| <code>/request</code> | Request transportation of package. Request goes to queue as task | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
-| <code>/report</code> | Report on state of the task | <code>msg={"taskId": a, "state" = error/done }</code> ||
-| <code>/gettask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
+| <code>/request</code> | Request transportation of package. Request goes to the queue as a task. | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
+| <code>/report</code> | Report on the state of the task. | <code>msg={"taskId": a, "state" = error/done }</code> ||
+| <code>/getTask</code> | Get the state of the task. | <code>msg={"taskId": a }</code> |{task state}|
 
 # Control layer
 ## Carrier control app
