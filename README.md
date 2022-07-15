@@ -82,7 +82,7 @@ participant A as Carrier
 participant O as Master plant 
 participant M as Manufacturer 
 
-P->>C: requestTransport(master p. location, <br>mfg location)
+P->>C: requestTransport(master plant <br>location, mfg location)
 C->>A: move(master plant position)
 A-->>C: response(accept/reject)
 Note over A: Carrier is driving to the <br>master plant location
@@ -100,7 +100,7 @@ C->>M: dispatch(packageId)
 M-->>C: response(accept/reject, dispatch task id)
 Note over M: dispatching process
 M->>C: dispatchFinished(taskId)
-C->>P: transportFinished(taskId)
+C->>P: transportFinished <br>(taskId)
 C->>A: move(next task/parking)
 
 ```
