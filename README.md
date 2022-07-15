@@ -69,6 +69,42 @@ style AL fill:#D7BDE2, stroke:#884EA0
 
 
 ```
+
+# Communication between nodes
+
+```mermaid
+
+sequenceDiagram
+participant P as Package
+    Note over P: Order for manufacturing has been confirmed
+participant C as Carriers managmenet
+participant A as Carrier
+participant O as Master plant 
+participant M as Manufacturer 
+
+P->>C: requestTransport(master plant position, <br>manufacturer position)
+C->>A: move(master plant position)
+A-->>C: response(accept/reject)
+Note over A: Carrier is driving to the master plant
+A->>C: report(error/done)
+C->>O: dispatch(packageId)
+O-->>C: response(accept/reject, dispatch task id)
+Note over O: dispatching process
+O->>C: dispatchFinished(taskId)
+C->>A: move(manufacturer position)
+
+A-->>C: response(accept/reject)
+Note over A: Carrier is driving to the manufacturer
+A->>C: report(error/done)
+C->>M: dispatch(packageId)
+M-->>C: response(accept/reject, dispatch task id)
+Note over M: dispatching process
+M->>C: dispatchFinished(taskId)
+C->>P: transportfinished(taskId)
+C->>A: move(next task/parking)
+
+```
+
 # Blockchain layer
 
 # Management layer
