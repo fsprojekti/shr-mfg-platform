@@ -85,16 +85,16 @@ participant M as Manufacturer
 P->>C: requestTransport(master plant <br>location, mfg location)
 C->>A: move(master plant position)
 A-->>C: response(accept/reject)
-Note over A: Carrier is driving to the <br>master plant location
+Note over A: Carrier moving to the <br>master plant location
 A->>C: report(error/done)
 C->>O: dispatch(packageId)
 O-->>C: response(accept/reject, dispatch task id)
-Note over O: dispatching process
+Note over O: dispatch process
 O->>C: dispatchFinished(taskId)
 C->>A: move(manufacturer location)
 
 A-->>C: response(accept/reject)
-Note over A: Carrier is driving to the <br>manufacturer location
+Note over A: Carrier moving to the <br>mfg location
 A->>C: report(error/done)
 C->>M: dispatch(packageId)
 M-->>C: response(accept/reject, dispatch task id)
