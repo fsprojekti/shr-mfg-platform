@@ -23,10 +23,7 @@ subgraph CL[Communication layer]
     CMFG[Manufacturing plant]
     CMC[Multiple carriers]
     CMP[Multiple packages]
-
-
-    end
-    
+    end  
 end
 subgraph AL[Control layer]
     CTM[Master plant app]
@@ -51,7 +48,7 @@ CM---CTM---PM
 
 MPM---CMP---P
 
-MCM---|HTTP API|---CMC---CC---CTC---PC
+MCM---|HTTP API|CMC---CC---CTC---PC
 
 
 
