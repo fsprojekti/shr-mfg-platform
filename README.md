@@ -41,7 +41,7 @@ subgraph PL[Physical layer]
    
     subgraph PL2[JetMax robotic arm]
         PMFG[Manufacturing plant]
-        PO[Master plant]
+        PM[Master plant]
     end
     P[Packages]
 end
