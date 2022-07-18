@@ -58,7 +58,7 @@ style AL fill:#D7BDE2, stroke:#884EA0
 sequenceDiagram
 participant P as Package
     Note over P: Order for mfg has<br> been confirmed
-participant C as Multiple carriers management
+participant C as Multiple carriers <br>management
 participant A as Carrier
 participant O as Master plant 
 participant M as Manufacturing plant 
