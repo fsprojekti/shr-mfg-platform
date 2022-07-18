@@ -13,51 +13,45 @@ by Tomaž:
 graph TD
 
 subgraph ML[Management layer]
-    MC[Multiple carriers management ]
-    MPP[Multiple packages management]
+    MCM[Multiple carriers management ]
+    MPM[Multiple packages management]
 end
 subgraph CL[Communication layer]
     subgraph CL1[HTTP servers]
     CC[Carrier]
-    CO[Master plant]
-    CM[Manufacturing plant]
-    MCM[Multiple carriers]
-    CPP[Multiple packages]
+    CM[Master plant]
+    CMFG[Manufacturing plant]
+    CMC[Multiple carriers]
+    CMP[Multiple packages]
 
 
     end
     
 end
 subgraph AL[Control layer]
-    AO[Master plant app]
-    AC[Carrier app]
-    AM[Manufacturing plant app]
+    CTM[Master plant app]
+    CTC[Carrier app]
+    CTMFG[Manufacturing plant app]
    
 end
 subgraph PL[Physical layer]
     subgraph PL1[ESP Microbit]
-    C[Carrier]
+    PC[Carrier]
     end
    
     subgraph PL2[JetMax robotic arm]
-        M[Manufacturing plant]
-        O[Master plant]
+        PMFG[Manufacturing plant]
+        PO[Master plant]
     end
     P[Packages]
 end
 
-AO---O
-AC---C
-AM---M
+CMFG---CTMFG---PMFG
+CM---CTM---PM
 
-CO---AO
-CC---AC
-CM---AM
+MPM---CMP---P
 
-
-MPP---CPP---P
-
-MC---|HTTP API|CC
+MCM---|HTTP API|CC---CTC---PC
 
 
 
@@ -76,16 +70,16 @@ style AL fill:#D7BDE2, stroke:#884EA0
 sequenceDiagram
 participant P as Package
     Note over P: Order for mfg has<br> been confirmed
-participant C as Carriers managmenet
+participant C as Carriers management
 participant A as Carrier
 participant O as Master plant 
 participant M as Manufacturer 
 
-P->>C: requestTransport(master plant <br>location, mfg location)
-C-->>P: response(accept/reject)
-C->>A: move(master plant position)
+P->>C: request(packageId, source <br>location, target location)
+C-->>P: response(status (accept/reject), queueIndex, taskId)
+C->>A: move(source location)
 A-->>C: response(accept/reject)
-Note over A: Carrier moving to <br>master pl. location
+Note over A: Carrier moving to <br>source location
 A->>C: report(error/done)
 C->>O: dispatch(packageId)
 O-->>C: response(accept/reject, dispatch task id)
@@ -94,7 +88,7 @@ O->>C: dispatchFinished(taskId)
 C->>A: move(manufacturer location)
 
 A-->>C: response(accept/reject)
-Note over A: Carrier moving to <br>mfg location
+Note over A: Carrier moving to <br>target location
 A->>C: report(error/done)
 C->>M: dispatch(packageId)
 M-->>C: response(accept/reject, dispatch task id)
@@ -119,6 +113,7 @@ C->>A: move(next task/parking)
 | ------------ | ----------- | ------------ | ------- |
 | <code>/move</code> | Move from source to target location | <code>msg={"source": a, "target" = b, "taskId"=? }</code> |{success/error}|
 
+Carrier Arduino app: https://github.com/fsprojekti/df_micro_maqueen-mbits-esp32_arduino_app
 
 ## Multiple carriers HTTP API
 
@@ -128,6 +123,7 @@ C->>A: move(next task/parking)
 | <code>/report</code> | Report on state of the task | <code>msg={"taskId": a, "state" = error/done }</code> ||
 | <code>/getTask</code> | Get state of the task | <code>msg={"taskId": a }</code> |{task state}|
 
+Carrier management Node.js application: https://github.com/fsprojekti/df-micro-maqueen-robot-cars-control-app
 
 ## Master plant HTTP API
 ## Manufacturing plant HTTP API
@@ -135,12 +131,13 @@ C->>A: move(next task/parking)
 
 | API endpoint | description | parameter(s) | returns |
 | ------------ | ----------- | ------------ | ------- |
-| <code>/request</code> | Request transportation of package. Request goes to the queue as a task. | <code>msg={"source": a, "target" = b}</code> |{queue index, taskId}|
-| <code>/report</code> | Report on the state of the task. | <code>msg={"taskId": a, "state" = error/done }</code> ||
-| <code>/getTask</code> | Get the state of the task. | <code>msg={"taskId": a }</code> |{task state}|
+| <code>/transportFinished</code> | Infor the package that the transport was successfully finished | <code>msg={"taskId": a</code> |{success/error}|
 
 # Control layer
 ## Carrier control app
+
+Carrier Arduino app: https://github.com/fsprojekti/df_micro_maqueen-mbits-esp32_arduino_app
+
 ## Master plant control app
 ## Manufacturing plant control app
 
