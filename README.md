@@ -1,4 +1,4 @@
-# shr-mfg-platform
+# Shared Manufacturing Platform
 
 ```mermaid
 graph TD
@@ -58,10 +58,10 @@ style AL fill:#D7BDE2, stroke:#884EA0
 sequenceDiagram
 participant P as Package
     Note over P: Order for mfg has<br> been confirmed
-participant C as Carriers management
+participant C as Multiple carriers management
 participant A as Carrier
 participant O as Master plant 
-participant M as Manufacturer 
+participant M as Manufacturing plant 
 
 P->>C: request(packageId, source <br>location, target location)
 C-->>P: response(status (accept/reject), queueIndex, taskId)
