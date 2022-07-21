@@ -58,32 +58,32 @@ style AL fill:#D7BDE2, stroke:#884EA0
 sequenceDiagram
 participant P as Package
     Note over P: Order for mfg has<br> been confirmed
-participant C as Multiple carriers <br>management
-participant A as Carrier
-participant O as Master plant 
-participant M as Manufacturing plant 
+participant MC as Multiple carriers <br>management
+participant C as Carrier
+participant M as Master plant 
+participant MFG as Manufacturing plant 
 
-P->>C: request(packageId, source <br>location, target location)
-C-->>P: response(status (accept/reject), queueIndex, taskId)
-C->>A: move(source location)
-A-->>C: response(accept/reject)
-Note over A: Carrier moving to <br>source location
-A->>C: report(error/done)
-C->>O: dispatch(packageId)
-O-->>C: response(accept/reject, dispatch task id)
-Note over O: dispatch process
-O->>C: dispatchFinished(taskId)
-C->>A: move(manufacturer location)
-
-A-->>C: response(accept/reject)
-Note over A: Carrier moving to <br>target location
-A->>C: report(error/done)
-C->>M: dispatch(packageId)
-M-->>C: response(accept/reject, dispatch task id)
+P->>MC: request(packageId, source <br>location, target location)
+MC-->>P: response(status (accept/reject), queueIndex, taskId)
+MC->>C: move(source location)
+C-->>MC: response(accept/reject)
+Note over C: Carrier moving to <br>source location
+C->>MC: report(error/done)
+MC->>M: dispatch(packageId)
+M-->>MC: response(accept/reject, dispatch task id)
 Note over M: dispatch process
-M->>C: dispatchFinished(taskId)
-C->>P: transportFinished <br>(taskId)
-C->>A: move(next task/parking)
+M->>MC: dispatchFinished(taskId)
+MC->>C: move(manufacturer location)
+
+C-->>MC: response(accept/reject)
+Note over C: Carrier moving to <br>target location
+C->>MC: report(error/done)
+MC->>MFG: dispatch(packageId)
+MFG-->>MC: response(accept/reject, dispatch task id)
+Note over MFG: dispatch process
+MFG->>MC: dispatchFinished(taskId)
+MC->>P: transportFinished <br>(taskId)
+MC->>C: move(next task/parking)
 
 ```
 
