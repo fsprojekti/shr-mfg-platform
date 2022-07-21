@@ -106,13 +106,14 @@ Note over MC: Delete request<br>from queue
 
 # Management layer
 ## Multiple carriers management
-## Multiple packages management
 * maintains a queue of active requests
 * maintains data of active robot cars, manufacturing plants and master plant (warehouse)
 * periodically processes requests on a first-come, first-served basis
-* selects cars for transport and requests the move
+* randomly selects an available car for transport and requests the move
 * requests a dispatch at a plant
 * after the transport finishes sends the car to the parking area
+
+## Multiple packages management
 
 # Communication layer
 
@@ -140,7 +141,11 @@ Note over MC: Delete request<br>from queue
 
 # Control layer
 ## Carrier control app
-
+* manages the movement of the robot car
+* movements depend on a pre-defined grid
+* each move is defined by a start (source) and end (target) location
+* the car always drives in anti-clockwise direction
+* the app assumes one of six crossroad variants as seen below
 
 
 ## Master plant control app
