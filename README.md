@@ -53,6 +53,8 @@ style AL fill:#D7BDE2, stroke:#884EA0
 
 # Communication between nodes
 
+The diagram shows an example of communication when the package is transported from the master plant (warehouse) to one of the manufacturing plants. A similar sequence is used when the package is transported in the opposite direction.
+
 ```mermaid
 
 sequenceDiagram
@@ -88,7 +90,7 @@ MC->>C: move(next task/parking)
 C-->>MC: response(accept/reject)
 Note over C: Carrier moving to <br>parking area
 C->>MC: report(error/done)
-Note over MC: Delete request from queue
+Note over MC: Delete request<br>from queue
 
 
 ```
