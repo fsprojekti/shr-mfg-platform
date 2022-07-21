@@ -146,6 +146,7 @@ Note over MC: Delete request<br>from queue
 * each move is defined by a start (source) and end (target) location
 * the car always drives in anti-clockwise direction
 * the app assumes one of six crossroad variants as seen below
+![grid-krizisca](https://user-images.githubusercontent.com/87708323/180209941-a22c9453-83d5-4831-95d7-5888382e7fcc.png)
 
 
 ## Master plant control app
