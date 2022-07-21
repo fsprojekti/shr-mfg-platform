@@ -57,7 +57,7 @@ style AL fill:#D7BDE2, stroke:#884EA0
 
 sequenceDiagram
 participant P as Package
-    Note over P: Order for mfg has<br> been confirmed
+Note over P: Order for mfg has<br> been confirmed
 participant MC as Multiple carriers <br>management
 participant C as Carrier
 participant M as Master plant 
@@ -73,8 +73,8 @@ MC->>M: dispatch(packageId)
 M-->>MC: response(accept/reject, dispatch task id)
 Note over M: dispatch process
 M->>MC: dispatchFinished(taskId)
-MC->>C: move(manufacturer location)
 
+MC->>C: move(manufacturer location)
 C-->>MC: response(accept/reject)
 Note over C: Carrier moving to <br>target location
 C->>MC: report(error/done)
@@ -83,7 +83,13 @@ MFG-->>MC: response(accept/reject, dispatch task id)
 Note over MFG: dispatch process
 MFG->>MC: dispatchFinished(taskId)
 MC->>P: transportFinished <br>(taskId)
+
 MC->>C: move(next task/parking)
+C-->>MC: response(accept/reject)
+Note over C: Carrier moving to <br>parking area
+C->>MC: report(error/done)
+Note over MC: Delete request from queue
+
 
 ```
 
