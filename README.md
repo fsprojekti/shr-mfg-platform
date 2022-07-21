@@ -71,21 +71,23 @@ MC->>C: move(source location)
 C-->>MC: response(accept/reject)
 Note over C: Carrier moving to <br>source location
 C->>MC: report(success/error)
+MC-->>C: response(success/error)
 MC->>M: dispatch(packageId)
 M-->>MC: response(accept/reject, dispatch task id)
 Note over M: dispatch process
 M->>MC: dispatchFinished(taskId)
-MC-->>M: response (success/error)
+MC-->>M: response(success/error)
 
 MC->>C: move(manufacturer location)
 C-->>MC: response(accept/reject)
 Note over C: Carrier moving to <br>target location
 C->>MC: report(success/error)
+MC-->>C: response(success/error)
 MC->>MFG: dispatch(packageId)
 MFG-->>MC: response(accept/reject, dispatch task id)
 Note over MFG: dispatch process
 MFG->>MC: dispatchFinished(taskId)
-MC-->>MFG: response (success/error)
+MC-->>MFG: response(success/error)
 MC->>P: transportFinished <br>(taskId)
 
 MC->>C: move(next task/parking)
