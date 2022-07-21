@@ -141,13 +141,20 @@ Note over MC: Delete request<br>from queue
 
 # Control layer
 ## Carrier control app
+* Arduino application for DFRobot micro:Maqueen Plus controlled by Mbits ESP32 microcontroller
 * manages the movement of the robot car
 * movements depend on a pre-defined grid
 * each move is defined by a start (source) and end (target) location
 * the car always drives in anti-clockwise direction
 * the app assumes one of six crossroad variants as seen below
 ![grid-krizisca](https://user-images.githubusercontent.com/87708323/180209941-a22c9453-83d5-4831-95d7-5888382e7fcc.png)
-
+	* variant 1: compulsory left turn (grid outside corners)
+	* variant 2: compulsory right turn (car coming out of the parking area)
+	* variant 3: turn left (if coming out of the parking area) or turn right (if coming out of the plant area)
+	* variant 4: turn left if this is the correct parking area (counter)
+	* variant 5: turn right if this is the correct plant (counter)
+	* variant 6: stop (at the plant or at the parking area
+	
 
 ## Master plant control app
 ## Manufacturing plant control app
