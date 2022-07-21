@@ -34,6 +34,7 @@ subgraph PL[Physical layer]
     P[Packages]
 end
 
+CMC---CM
 CMFG---CTMFG---PMFG
 CM---CTM---PM
 
@@ -104,6 +105,8 @@ Note over MC: Delete request<br>from queue
 # Management layer
 ## Multiple carriers management
 ## Multiple packages management
+
+
 
 # Communication layer
 
