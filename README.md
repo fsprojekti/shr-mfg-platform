@@ -35,10 +35,11 @@ subgraph PL[Physical layer]
 end
 
 MCM---|HTTP API|CM
-MCM---|HTTP API|CFMG
+MCM---|HTTP API|CMFG
 MCM---CMFG
 CMFG---CTMFG---PMFG
 CM---CTM---PM
+MPM---|HTTP API|CMC
 
 MPM---CMP---P
 
