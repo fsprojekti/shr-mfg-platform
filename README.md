@@ -173,3 +173,11 @@ Repository: https://github.com/fsprojekti/df-micro-maqueen-robot-cars-control-ap
 
 Repository: https://github.com/fsprojekti/df_micro_maqueen-mbits-esp32_arduino_app
 
+## Package management app:
+
+Repository: https://github.com/fsprojekti/shr-mfg-platform-packages
+
+## Smart contracts:
+
+Repository: https://github.com/fsprojekti/shr-mfg-platforms-smart-contracts
+
