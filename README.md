@@ -61,43 +61,52 @@ The diagram shows an example of communication when the package is transported fr
 ```mermaid
 
 sequenceDiagram
-participant P as Package
-Note over P: Order for mfg has<br> been confirmed
-participant MC as Multiple carriers <br>management
-participant C as Carrier
-participant M as Master plant 
-participant MFG as Manufacturing plant 
+participant A as Package
+participant B as Pool
+participant C as Manufacturer
+participant D as Car controller
+participant E as Warehouse
+A->>B: sendOffer(price, endDate) BC
+note over B: Offer waiting to be accepted or exipred
+C->>B: acceptOffer(offerId) BC
+loop Checking offers
+    A-->B: offer accepted?
+end
+A->>D: request(packageAddress, offerId, source, target) WEB
+note over D: transport moves to warehouse
+D->>E:dispatch(packageAddress, offerId, mode) WEB
+note over E: Dispatching package <br>from warehouse to trasnsport
+E->>D: dispatchFinished(offerId) WEB
+note over D: transport moving to manufacturer
 
-P->>MC: request(packageId, source <br>location, target location)
-MC-->>P: response(status (accept/reject), queueIndex, taskId)
-MC->>C: move(source location)
-C-->>MC: response(accept/reject)
-Note over C: Carrier moving to <br>source location
-C->>MC: report(success/error)
-MC-->>C: response(success/error)
-MC->>M: dispatch(packageId)
-M-->>MC: response(accept/reject, dispatch task id)
-Note over M: dispatch process
-M->>MC: dispatchFinished(taskId)
-MC-->>M: response(success/error)
+D->>C:dispatch(packageAddress, offerId, mode) WEB
+note over C: Dispatching package
+C->>D: dispatchFinished(offerId) WEB
+D-->>A: transportFinished(pakageAddress, offerId) WEB
+note over C: Processing package 3min
+C->>A: processingFinished(offerId) WEB
+A->>D: request(packageAddress, offerId, source, target) WEB
+note over D: transport moves to manufacturer
 
-MC->>C: move(manufacturer location)
-C-->>MC: response(accept/reject)
-Note over C: Carrier moving to <br>target location
-C->>MC: report(success/error)
-MC-->>C: response(success/error)
-MC->>MFG: dispatch(packageId)
-MFG-->>MC: response(accept/reject, dispatch task id)
-Note over MFG: dispatch process
-MFG->>MC: dispatchFinished(taskId)
-MC-->>MFG: response(success/error)
-MC->>P: transportFinished <br>(taskId)
+D->>C:dispatch(packageAddress, offerId, mode) WEB
+note over C: Dispatching package <br>from warehouse to trasnsport
+C->>D: dispatchFinished(offerId) WEB
+note over D: transport moving to warehouse
 
-MC->>C: move(next task/parking)
-C-->>MC: response(accept/reject)
-Note over C: Carrier moving to <br>parking area
-C->>MC: report(success/error)
-Note over MC: Delete request<br>from queue
+D->>E:dispatch(packageAddress, offerId, mode) WEB
+note over E: Dispatching package <br>from trasnsport to warehouse
+E->>D: dispatchFinished(offerId) WEB
+
+
+
+D-->>A: transportFinished(pakageAddress, offerId) WEB
+
+
+
+
+
+
+
 
 
 ```
