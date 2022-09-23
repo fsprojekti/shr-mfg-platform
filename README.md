@@ -72,9 +72,9 @@ C->>B: acceptOffer(offerId) BC
 loop Checking offers
     A-->B: offer accepted?
 end
-A->>D: request(packageAddress, offerId, source, target) WEB
+A->>D: request(packageId, offerId, source, target) WEB
 note over D: transport moves to warehouse
-D->>E:dispatch(packageAddress, offerId, mode) WEB
+D->>E:dispatch(offerId, mode) WEB
 note over E: Dispatching package <br>from warehouse to trasnsport
 E->>D: dispatchFinished(offerId) WEB
 note over D: transport moving to manufacturer
