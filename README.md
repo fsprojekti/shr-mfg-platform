@@ -147,7 +147,7 @@ D-->>A: transportFinished(pakageAddress, offerId) WEB
 ## Carrier control app
 
 * Arduino application for DFRobot micro:Maqueen Plus controlled by Mbits ESP32 microcontroller
-* manages the movement of the robot car
+* it manages the movement of the robot car
 * movements depend on a pre-defined grid
 * each move is defined by a start (source) and end (target) location
 * the car always drives in anti-clockwise direction
@@ -163,8 +163,11 @@ D-->>A: transportFinished(pakageAddress, offerId) WEB
 ## Master plant control app
 
 * Node.js application for Jetmax robotic arm that acts as the master plant = warehouse
-* it works similarly to any 
-
+* it works similarly to any manufacturing plant
+* it receives dispatch requests from the multiple carriers control app and ads the tasks to the queue
+* it processes tasks in sequential order and move packages from the carrier to the warehouse, from the warehouse to the carrier or internally inside the warehouse to optimize package storage and manipulation
+* it maintains a state of the warehouse which include the exact location of all the packages in storage docks, receive and dispatch buffers
+* 
 ## Manufacturing plant control app
 
 ---
