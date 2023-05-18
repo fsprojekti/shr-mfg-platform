@@ -136,6 +136,12 @@ D-->>A: transportFinished(pakageAddress, offerId) WEB
 
 ## Manufacturing plant HTTP API
 
+| API endpoint          | type | description                                    | parameter(s)                                                                            | returns                            |
+|---|---|---|---|---|
+| <code>/offer/new</code> | POST | Post new offer to a manufacturer | <code>msg={"price": int, "endDate": timestamp}</code> | {"state": accept/reject, "queueIndex": int, "offerId": String} |
+| <code>/dispatch</code>  | POST | called by a control app to request a dispatch (load/unload) | <code>msg={"packageId": id, "demandId": id, "mode": load/unload} }</code>                               | {"state": success/error/reject}                                | 
+|<code>/getTask</code> | | Get state of the task  | <code>"taskId": String, "state": "done"</code>                                                         | {"state": state/error/reject}                          
+
 ## Multiple packages HTTP API
 
 | API endpoint | description                                                                            | parameter(s)                   | returns |
