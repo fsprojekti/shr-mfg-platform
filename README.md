@@ -63,13 +63,16 @@ The diagram shows an example of communication when the package is transported fr
 sequenceDiagram
 participant A as Package
 participant B as Pool
-participant C as Manufacturer
+participant C as ManufacturerA
+participant CC as ManufacturerB
 participant D as Car controller
 participant E as Warehouse
-A->>B: sendOffer(price, endDate) BC
-note over B: Offer waiting to be accepted or exipred
-C->>B: acceptOffer(offerId) BC
-loop Checking offers
+A->>C: sendOffer(price, endDate)
+note over C: offer rejected, accepted or redirected to Pool
+C->>B: sendOffer(offerId, manufacturerId, priceA, fee) BC
+
+CC->>B: acceptOffer(offerId) BC
+loop Checking offer
     A-->B: offer accepted?
 end
 A->>D: request(packageId, offerId, source, target) WEB
@@ -79,22 +82,27 @@ note over E: Dispatching package <br>from warehouse to trasnsport
 E->>D: dispatchFinished(offerId) WEB
 note over D: transport moving to manufacturer
 
-D->>C:dispatch(packageAddress, offerId, mode) WEB
-note over C: Dispatching package
-C->>D: dispatchFinished(offerId) WEB
+D->>CC:dispatch(packageAddress, offerId, mode) WEB
+note over CC: Dispatching package
+CC->>D: dispatchFinished(offerId) WEB
 D-->>A: transportFinished(pakageAddress, offerId) WEB
-note over C: Processing package 3min
-C->>A: processingFinished(offerId) WEB
+note over CC: Processing package 3min
+CC->>A: processingFinished(offerId) WEB
+
+A->>B: transferFunds(offerId) BC
+B->>C: transferFunds(manufacturerAId, fee) BC
+B->>CC: transferFunds(manufacturerBId, priceA) BC
+
 A->>D: request(packageAddress, offerId, source, target) WEB
 note over D: transport moves to manufacturer
 
-D->>C:dispatch(packageAddress, offerId, mode) WEB
-note over C: Dispatching package <br>from warehouse to trasnsport
-C->>D: dispatchFinished(offerId) WEB
+D->>CC:dispatch(packageAddress, offerId, mode) WEB
+note over CC: Dispatching package <br>from warehouse to trasnsport
+CC->>D: dispatchFinished(offerId) WEB
 note over D: transport moving to warehouse
 
 D->>E:dispatch(packageAddress, offerId, mode) WEB
-note over E: Dispatching package <br>from trasnsport to warehouse
+note over E: Dispatching package <br>from transsport to warehouse
 E->>D: dispatchFinished(offerId) WEB
 
 D-->>A: transportFinished(pakageAddress, offerId) WEB
